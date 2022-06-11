@@ -1,3 +1,3 @@
-module check/certificate
+module check-certificate
 
 go 1.18
