@@ -2,14 +2,25 @@ package main
 
 import (
 	"crypto/tls"
+	"fmt"
 	"time"
 )
 
-func getExpirationDate(url string, port string) (string, error) {
-	conn, err := tls.Dial("tcp", url+":"+port, nil)
+func buildURL(url, port string) string {
+	return fmt.Sprintf("%s:%s", url, port)
+}
+
+func getExpiryFromConnection(connection *tls.Conn) time.Time {
+	return connection.ConnectionState().PeerCertificates[0].NotAfter
+}
+
+func getExpirationDate(url, port string) (string, error) {
+	connection, err := tls.Dial("tcp", buildURL(url, port), nil)
 	if err != nil {
-		panic("SSL certificate err: " + err.Error())
+		return "", err
 	}
-	expiry := conn.ConnectionState().PeerCertificates[0].NotAfter
-	return expiry.Format(time.RFC3339), err
+
+	expiry := getExpiryFromConnection(connection)
+
+	return expiry.Format(time.RFC3339), nil
 }
