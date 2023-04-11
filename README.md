@@ -10,7 +10,6 @@ For build and execute the code, you need to install Go https://go.dev/doc/instal
 
 - Clone the project: `git clone git@github.com:wlensinas/check-ssl-certificate.git` or [download zip](https://github.com/wlensinas/check-ssl-certificate/archive/refs/heads/master.zip)
 - Move to the folder `cd check-ssl-certificate`
-- Build the binary: `go build` or `make build`
 
 ## What is the difference between go build and make build?
 
@@ -20,12 +19,13 @@ By default, the produced binary file contains debugging information and the symb
 
 On macOS or linux operating systems:
 
-- Execute `./check-certificate <domain>`
+1. Update `sites.json`
+2. Execute `make run`
 
-Example: `./check-certificate www.google.com.ar`: 
-
-```bash
-2022-08-17T10:46:22Z
+```
+URL	 Certificate Date	 Days until expiration	
+www.google.com.ar	 2023-06-12T08:27:56Z	 62	
+www.infobae.com	 2023-06-11T17:03:10Z	 62	
 ```
 
 # Source

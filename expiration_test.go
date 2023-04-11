@@ -10,8 +10,8 @@ func TestGetExpirationDate(t *testing.T) {
 	const port = "443"
 
 	want := regexp.MustCompile(`^((?:(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2}(?:\.\d+)?))(Z|[\+-]\d{2}:\d{2})?)$`)
-	expirationDate, err := getExpirationDate(url, port)
-	if !want.MatchString(expirationDate) || err != nil {
-		t.Fatalf(`getExpirationDate(url, port) = %q, %v, want match for %#q, nil`, expirationDate, err, want)
+	expirationDate := getExpirationDate(url, port)
+	if !want.MatchString(expirationDate) {
+		t.Fatalf(`getExpirationDate(url, port) = %q, want match for %#q, nil`, expirationDate, want)
 	}
 }

@@ -4,7 +4,7 @@ test:
 build:
 	go build -ldflags "-w -s"
 
-check:
-	go run main.go expiration.go www.google.com.ar
+run:
+	go run main.go expiration.go
 
 .PHONY: test build check
